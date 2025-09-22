@@ -11,7 +11,6 @@ class Settings(BaseSettings):
     api_port: int = Field(default=8000, alias="API_PORT")
     
     # Vector Database Configuration
-    vector_db_type: str = Field(default="qdrant", alias="VECTOR_DB_TYPE")
     vector_db_url: str = Field(default="http://localhost:6333", alias="VECTOR_DB_URL")
     vector_db_api_key: Optional[str] = Field(default=None, alias="VECTOR_DB_API_KEY")
     vector_db_collection_name: str = Field(default="job_documents", alias="VECTOR_DB_COLLECTION_NAME")
@@ -24,7 +23,6 @@ class Settings(BaseSettings):
     llm_api_key: Optional[str] = Field(default=None, alias="LLM_API_KEY")
     
     # Embedding Configuration
-    embedding_provider: str = Field(default="sentence-transformers", alias="EMBEDDING_PROVIDER")
     embedding_model: str = Field(default="all-MiniLM-L6-v2", alias="EMBEDDING_MODEL")
     embedding_dimension: int = Field(default=384, alias="EMBEDDING_DIMENSION")
     embedding_batch_size: int = Field(default=100, alias="EMBEDDING_BATCH_SIZE")
@@ -59,6 +57,9 @@ class Settings(BaseSettings):
     raw_data_dir: str = Field(default="./data/raw", alias="RAW_DATA_DIR")
     processed_data_dir: str = Field(default="./data/processed", alias="PROCESSED_DATA_DIR")
     embeddings_dir: str = Field(default="./data/embeddings", alias="EMBEDDINGS_DIR")
+
+    # File name
+    file_name: str = Field(default='LF Jobs.xlsx', alias = 'FILE_NAME')
     
     class Config:
         env_file = ".env"
