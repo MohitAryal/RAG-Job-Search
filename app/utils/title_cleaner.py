@@ -2,6 +2,20 @@ from typing import List, Dict
 import spacy
 import re
 
+nlp = spacy.load("en_core_web_sm")
+# Define constants
+SENIORITY_TERMS = {
+    'senior', 'sr', 'staff', 'principal', 'director',
+    'associate', 'graduate', 'entry', 'junior', 'jr',
+    'intern', 'trainee', 'chief', 'head', 'vice', 'assistant', 'dir',
+    'vp', 'manager'
+}
+
+COMMON_COMPANIES = {
+    'tiktok', 'google', 'microsoft', 'amazon', 'meta', 'apple',
+    'facebook', 'netflix', 'uber', 'airbnb', 'tesla', 'nvidia'
+}
+
 def clean_job_titles(title: str) -> List[Dict[str, str]]:
     """
     Clean job titles using spaCy NLP and regex patterns.
@@ -12,21 +26,6 @@ def clean_job_titles(title: str) -> List[Dict[str, str]]:
     Returns:
         Clean title string
     """
-
-    # Define constants
-    SENIORITY_TERMS = {
-        'senior', 'sr', 'staff', 'principal', 'director',
-        'associate', 'graduate', 'entry', 'junior', 'jr',
-        'intern', 'trainee', 'chief', 'head', 'vice', 'assistant', 'dir',
-        'vp', 'manager'
-    }
-
-    COMMON_COMPANIES = {
-        'tiktok', 'google', 'microsoft', 'amazon', 'meta', 'apple',
-        'facebook', 'netflix', 'uber', 'airbnb', 'tesla', 'nvidia'
-    }
-
-    nlp = spacy.load("en_core_web_sm")
 
     original_title = title.strip()
     cleaned = original_title.lower()

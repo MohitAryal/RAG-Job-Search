@@ -31,6 +31,11 @@ def preprocess_job_location(location: str) -> dict:
         cities.append(city.strip())
         states.append(state.strip())
         countries.append("USA")
+        return {"cities": list(set(cities)),
+        "states": list(set(states)),
+        "countries": list(set(countries)),
+        "is_remote": is_remote
+        }
 
     cleaned_split = [c.strip() for c in cleaned.split(',')]
     cleaned_len = len(cleaned_split)
@@ -43,7 +48,7 @@ def preprocess_job_location(location: str) -> dict:
     elif cleaned_len > 3:
       cities = cleaned_split[::2]
       states = cleaned_split[1::2]
-      countries = 'USA'
+      countries = ['USA']
 
     else:
       # City, Country format
