@@ -60,7 +60,7 @@ class Settings(BaseSettings):
 
     # File name
     file_name: str = Field(default='LF Jobs.xlsx', alias = 'FILE_NAME')
-    processed_file_name: str = Field(default='processed.json', alias = 'FILE_NAME')
+    processed_file_name: str = Field(default='processed.json', alias = 'PROCESSED_FILE_NAME')
     
     class Config:
         env_file = ".env"
