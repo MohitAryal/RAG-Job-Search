@@ -32,11 +32,6 @@ class Settings(BaseSettings):
     max_top_k: int = Field(default=50, alias="MAX_TOP_K")
     similarity_threshold: float = Field(default=0.7, alias="SIMILARITY_THRESHOLD")
     
-    # Document Chunking
-    chunk_size: int = Field(default=512, alias="CHUNK_SIZE")
-    chunk_overlap: int = Field(default=50, alias="CHUNK_OVERLAP")
-    min_chunk_size: int = Field(default=100, alias="MIN_CHUNK_SIZE")
-    
     # Reranking
     reranker_model: str = Field(default="cross-encoder/ms-marco-MiniLM-L-6-v2", alias="RERANKER_MODEL")
     reranker_top_k: int = Field(default=5, alias="RERANKER_TOP_K")
@@ -56,11 +51,14 @@ class Settings(BaseSettings):
     data_dir: str = Field(default="./data", alias="DATA_DIR")
     raw_data_dir: str = Field(default="./data/raw", alias="RAW_DATA_DIR")
     processed_data_dir: str = Field(default="./data/processed", alias="PROCESSED_DATA_DIR")
-    embeddings_dir: str = Field(default="./data/embeddings", alias="EMBEDDINGS_DIR")
+    chunked_data_dir: str = Field(default="./data/chunks", alias="CHUNKED_DATA_DIR")
+    embeddings_data_dir: str = Field(default="./data/embeddings", alias="EMBEDDINGS_DATA_DIR")
 
     # File name
-    file_name: str = Field(default='LF Jobs.xlsx', alias = 'FILE_NAME')
-    processed_file_name: str = Field(default='processed.json', alias = 'PROCESSED_FILE_NAME')
+    file_name: str = Field(default='LF Jobs.xlsx', alias='FILE_NAME')
+    processed_file_name: str = Field(default='processed.json', alias='PROCESSED_FILE_NAME')
+    chunked_file_name: str = Field(default='chunked.json', alias='CHUNKED_FILE_NAME')
+    embeddings_file_name: str = Field(default='embeddings.json', alias='EMBEDDINGS_FILE_NAME')
     
     class Config:
         env_file = ".env"
