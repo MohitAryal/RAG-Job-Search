@@ -14,7 +14,7 @@ def generate_chunks(job):
           "category": job['Job Category'],
       }
   # Store sections as a dictionary
-  chunks = [{'content': f'{section_name.strip()}\n{section_content.strip()}', 'metadata': metadata, 'chunk_id': f'{metadata["job_id"]}_{i}'} for i, (section_name, section_content) in enumerate(sections)]
+  chunks = [{'content': f'{section_name.strip()}\n{section_content.strip()}', 'metadata': metadata, 'chunk_id': f'{metadata["job_id"][2:]}_{i}'} for i, (section_name, section_content) in enumerate(sections)]
   return chunks
 
 
