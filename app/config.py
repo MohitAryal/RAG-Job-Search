@@ -58,7 +58,8 @@ class Settings(BaseSettings):
     file_name: str = Field(default='LF Jobs.xlsx', alias='FILE_NAME')
     processed_file_name: str = Field(default='processed.json', alias='PROCESSED_FILE_NAME')
     chunked_file_name: str = Field(default='chunked.json', alias='CHUNKED_FILE_NAME')
-    embeddings_file_name: str = Field(default='embeddings.json', alias='EMBEDDINGS_FILE_NAME')
+    embeddings_file_name: str = Field(default='embeddings.npy', alias='EMBEDDINGS_FILE_NAME')
+    
     
     class Config:
         env_file = ".env"
