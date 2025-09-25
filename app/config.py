@@ -53,12 +53,14 @@ class Settings(BaseSettings):
     processed_data_dir: str = Field(default="./data/processed", alias="PROCESSED_DATA_DIR")
     chunked_data_dir: str = Field(default="./data/chunks", alias="CHUNKED_DATA_DIR")
     embeddings_data_dir: str = Field(default="./data/embeddings", alias="EMBEDDINGS_DATA_DIR")
+    keyword_retriever_dir: str = Field(default="./data/keyword_retriever", alias="KEYWORD_RETRIEVER_DIR")
 
     # File name
     file_name: str = Field(default='LF Jobs.xlsx', alias='FILE_NAME')
     processed_file_name: str = Field(default='processed.json', alias='PROCESSED_FILE_NAME')
     chunked_file_name: str = Field(default='chunked.json', alias='CHUNKED_FILE_NAME')
     embeddings_file_name: str = Field(default='embeddings.npy', alias='EMBEDDINGS_FILE_NAME')
+    keyword_retriever_file: str = Field(default='keyword_retriever.pkl', alias='KEYWORD_RETRIVER_FILE')
     
     
     class Config:

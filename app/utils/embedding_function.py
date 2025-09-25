@@ -4,7 +4,6 @@ from app.config import settings
 
 # Use GPU
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
-print(f'\nUsing device: {device}')
 
 # Load the model    
 embedder = SentenceTransformer(settings.embedding_model, device=device)
