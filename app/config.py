@@ -28,21 +28,21 @@ class Settings(BaseSettings):
     embedding_batch_size: int = Field(default=100, alias="EMBEDDING_BATCH_SIZE")
     
     # Search Configuration
-    default_top_k: int = Field(default=10, alias="DEFAULT_TOP_K")
+    default_top_k: int = Field(default=20, alias="DEFAULT_TOP_K")
     max_top_k: int = Field(default=50, alias="MAX_TOP_K")
     similarity_threshold: float = Field(default=0.7, alias="SIMILARITY_THRESHOLD")
     
     # Reranking
     reranker_model: str = Field(default="cross-encoder/ms-marco-MiniLM-L-6-v2", alias="RERANKER_MODEL")
     reranker_top_k: int = Field(default=5, alias="RERANKER_TOP_K")
-    enable_reranking: bool = Field(default=True, alias="ENABLE_RERANKING")
     
-    # Hybrid Search
-    enable_hybrid_search: bool = Field(default=True, alias="ENABLE_HYBRID_SEARCH")
-    hybrid_search_alpha: float = Field(default=0.7, alias="HYBRID_SEARCH_ALPHA")
+    # Keyword Search
     bm25_k1: float = Field(default=1.2, alias="BM25_K1")
     bm25_b: float = Field(default=0.75, alias="BM25_B")
     
+    # Hybrid Search
+    k: float = Field(default=60, alias="K")
+
     # Rate Limiting
     rate_limit_per_minute: int = Field(default=60, alias="RATE_LIMIT_PER_MINUTE")
     rate_limit_burst: int = Field(default=10, alias="RATE_LIMIT_BURST")
