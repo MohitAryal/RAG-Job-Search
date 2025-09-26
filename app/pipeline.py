@@ -1,9 +1,9 @@
 from app.config import settings
 from pathlib import Path
-# from app.helpers.preprocessing import preprocess_dataset
-# from app.utils.chunker import chunk_job_descriptions
-# from app.helpers.embeddings import embed_chunks
-# from app.utils.bm25 import create_bm25_retriever
+from app.helpers.preprocessing import preprocess_dataset
+from app.utils.chunker import chunk_job_descriptions
+from app.helpers.embeddings import embed_chunks
+from app.utils.bm25 import create_bm25_retriever
 from app.utils.vector_store import get_qdrant_client, populate_vectordb
 
 raw_data_path = Path(settings.raw_data_dir) / settings.file_name
