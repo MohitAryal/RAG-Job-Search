@@ -3,20 +3,15 @@ from app.utils.embedding_function import embed_function
 from qdrant_client.models import Filter, FieldCondition, MatchValue, Range
 from typing import List, Dict, Any, Optional
 from app.config import settings
+from collections import defaultdict
 
 
-def qdrant_semantic_search(
-    query: 'str',
-    filters: Optional[Dict[str, Any]] = None
-) -> List[Dict[str, Any]]:
+def qdrant_semantic_search(query: 'str', filters: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
     """
     Perform semantic search in Qdrant collection
     
     Args:
-        client: Qdrant client instance
-        collection_name: Name of the collection to search
         query_embedding: Query embedding vector
-        top_k: Number of top results to return
         filters: Metadata filters for search
     
     Returns:
@@ -37,23 +32,30 @@ def qdrant_semantic_search(
     search_results = client.query_points(
         collection_name=settings.vector_db_collection_name,
         query=query_embedding,
-        limit=settings.default_top_k,
+        limit=100,
         query_filter=filter_conditions,
     )
 
     points = search_results.points
 
-    # Format results with rank
-    results = []
-    for rank, point in enumerate(points, 1):
-        results.append({
-            'id': point.id,
-            'score': point.score,
-            'rank': rank,
-            'job_id': point.payload['job_id']
-        })
+    # Accumulate scores per job_id
+    job_scores = defaultdict(list)
+
+    for point in points:
+        job_id = point.payload['job_id']
+        score = point.score
+        job_scores[job_id].append(score)
+
+    # Compute average score per job_id
+    job_avg_scores = {job_id: sum(scores) / len(scores) for job_id, scores in job_scores.items()}
+
+    # Sort job_ids by average score in descending order
+    sorted_jobs = sorted(job_avg_scores.items(), key=lambda item: item[1], reverse=True)
+
+    # Step assign ranks
+    ranked_jobs = {job_id: rank + 1 for rank, (job_id, _) in enumerate(sorted_jobs)}
     
-    return results
+    return ranked_jobs
 
 
 def _build_filter_conditions(filters: Dict[str, Any]) -> Filter:
