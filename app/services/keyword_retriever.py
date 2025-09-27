@@ -10,7 +10,7 @@ storage_path = Path(settings.keyword_retriever_dir) / settings.keyword_retriever
 chunk_path = Path(settings.chunked_data_dir) / settings.chunked_file_name
 
 
-def search_bm25(query: str, top_k: int = 100) -> List[Dict[str, Any]]:
+def search_bm25(query: str) -> List[Dict[str, Any]]:
     """
     Search using BM25 retriever.
     
@@ -33,7 +33,7 @@ def search_bm25(query: str, top_k: int = 100) -> List[Dict[str, Any]]:
     scores = bm25_retriever.get_scores(query_tokens)
     
     # Get top-k results
-    top_indices = sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)[:top_k]
+    top_indices = sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)[:100]
     
     results = get_doc_ids(ids=top_indices, scores=scores)
     

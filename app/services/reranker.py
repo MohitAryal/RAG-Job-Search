@@ -70,7 +70,7 @@ def prepare_job_text(job: Dict[str, Any]) -> str:
 
 cross_encoder = CrossEncoder(settings.reranker_model)
 
-def rerank_jobs(job_ids: List[str], query: str, top_k:int) -> List[Dict[str, Any]]:
+def rerank_jobs(job_ids: List[str], query: str) -> List[Dict[str, Any]]:
     """Rerank jobs using cross-encoder based on query relevance."""  
     # Get all the jobs
     data = load_jobs()
@@ -92,4 +92,4 @@ def rerank_jobs(job_ids: List[str], query: str, top_k:int) -> List[Dict[str, Any
     job_score_pairs.sort(key=lambda x: x[1], reverse=True)
     
     # Return top_k results
-    return [job for job, score in job_score_pairs[:top_k]]
+    return [job for job, score in job_score_pairs[:settings.reranker_top_k]]

@@ -1,5 +1,6 @@
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import JsonOutputParser
 from app.config import settings
 
 def llm_result(results, query):
@@ -50,7 +51,7 @@ def llm_result(results, query):
         ]
     )
 
-    chain = prompt | llm
+    chain = prompt | llm | JsonOutputParser()
     
     # Keys you want to keep
     keys_to_keep = {'ID', 'Job Title', 'Job Location', 'Job Level', 'Job Description'}
@@ -58,7 +59,7 @@ def llm_result(results, query):
     # Extract only those keys from each dictionary
     filtered_result = [{k: d[k] for k in keys_to_keep if k in d} for d in results]   
 
-    response = chain.invoke({'query': query, 'results': filtered_result}).content
+    response = chain.invoke({'query': query, 'results': filtered_result})
 
     print(response)
 

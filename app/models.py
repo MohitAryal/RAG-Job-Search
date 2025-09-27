@@ -69,8 +69,8 @@ class SearchResult(BaseModel):
         description="Full job description (included only if requested)"
     )
     
-    explanation: Optional[str] = Field(
-        None,
+    explanation = Field(
+        ...,
         description="LLM-generated explanation for why this job is relevant"
     )
 
