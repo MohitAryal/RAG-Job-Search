@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field, validator
 from typing import List, Optional
 from datetime import datetime
+from app.config import settings
 
 
 class QueryRequest(BaseModel):
@@ -15,7 +16,7 @@ class QueryRequest(BaseModel):
     )
     
     top_k: int = Field(
-        default=5,
+        default=settings.reranker_top_k,
         ge=1,
         le=10,
         description="Number of results to return (1–10)",
