@@ -67,7 +67,7 @@ def prepare_job_text(job: Dict[str, Any]) -> str:
     return " | ".join(text_parts)
 
 
-def rerank_jobs(job_ids: List[str], query: str, top_k: Optional[int]=settings.reranker_top_k) -> List[Dict[str, Any]]:
+def rerank_jobs(job_ids: List[str], query: str, top_k:int) -> List[Dict[str, Any]]:
     """Rerank jobs using cross-encoder based on query relevance."""
     cross_encoder = CrossEncoder(settings.reranker_model)
     

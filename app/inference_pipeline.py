@@ -2,9 +2,10 @@ from app.services.hybrid_search import perform_hybrid_search
 from app.services.reranker import rerank_jobs
 from app.services.LLM_integration import llm_result
 from typing import Optional
+from app.config import settings
 
 
-def run_pipeline(query: str, top_k=Optional[int]):
+def run_pipeline(query: str, top_k:Optional[int] = settings.reranker_top_k):
     # 1. Search for relevant documents
     search_result = perform_hybrid_search(query=query)
 
