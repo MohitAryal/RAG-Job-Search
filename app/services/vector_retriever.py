@@ -2,6 +2,7 @@ from app.utils.vector_store import get_qdrant_client
 from app.utils.embedding_function import embed_function
 from typing import List, Dict, Any
 from app.config import settings
+from pathlib import Path
 from collections import defaultdict
 
 

@@ -8,6 +8,7 @@ from qdrant_client.models import (
     VectorParams,
     PointStruct,
 )
+from pathlib import Path
 
 chunks_path = Path(settings.chunked_data_dir) / settings.chunked_file_name
 embeddings_path = Path(settings.embeddings_data_dir) / settings.embeddings_file_name

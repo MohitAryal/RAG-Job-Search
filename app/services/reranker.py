@@ -6,16 +6,18 @@ from pathlib import Path
 
 file_path = Path(settings.processed_data_dir) / settings.processed_file_name
 
-def extract_jobs_by_ids(job_ids: List[str]) -> List[Dict[str, Any]]:
-    """Extract specific jobs from processed data using job IDs."""
+
+def load_jobs():
     with open(file_path, 'r', encoding='utf-8') as f:
         processed_data = json.load(f)
+    return processed_data
+
+
+def extract_jobs_by_ids(job_ids: List[str], data_dict) -> List[Dict[str, Any]]:
+    """Extract specific jobs from processed data using job IDs."""
     
-    extracted_jobs = []
-    
-    for job in processed_data:
-        job_id = job.get('ID')
-        extracted_jobs.append(job)
+    job_ids_set = set(job_ids)
+    extracted_jobs = [job for job in data_dict if job['ID'] in job_ids_set]
     
     return extracted_jobs
 
@@ -66,13 +68,15 @@ def prepare_job_text(job: Dict[str, Any]) -> str:
     
     return " | ".join(text_parts)
 
+cross_encoder = CrossEncoder(settings.reranker_model)
 
 def rerank_jobs(job_ids: List[str], query: str, top_k:int) -> List[Dict[str, Any]]:
-    """Rerank jobs using cross-encoder based on query relevance."""
-    cross_encoder = CrossEncoder(settings.reranker_model)
-    
+    """Rerank jobs using cross-encoder based on query relevance."""  
+    # Get all the jobs
+    data = load_jobs()
+
     # Get the jobs
-    jobs = extract_jobs_by_ids(job_ids)
+    jobs = extract_jobs_by_ids(job_ids, data)
 
     # Prepare job texts
     job_texts = [prepare_job_text(job) for job in jobs]

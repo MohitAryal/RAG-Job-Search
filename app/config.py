@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     vector_size: int = Field(default=384, alias="VECTOR_SIZE")
     
     # LLM Configuration
-    llm_model: str = Field(default="llama3-70b-8192", alias="LLM_MODEL")
+    llm_model: str = Field(default="llama-3.1-8b-instant", alias="LLM_MODEL")
     llm_temperature: float = Field(default=0.3, alias="LLM_TEMPERATURE")
     llm_max_tokens: int = Field(default=1000, alias="LLM_MAX_TOKENS")
     llm_api_key: Optional[str] = Field(default=None, alias="LLM_API_KEY")
