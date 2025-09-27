@@ -6,6 +6,8 @@ import re
 import pandas as pd
 from app.config import settings
 
+chunked_data_path = Path(settings.chunked_data_dir) / settings.chunked_file_name
+keyword_retriever_path = Path(settings.keyword_retriever_dir) / settings.keyword_retriever_file
 
 def preprocess_text_for_bm25(text: str) -> List[str]:
     """
@@ -29,8 +31,7 @@ def preprocess_text_for_bm25(text: str) -> List[str]:
     return tokens
 
 
-def create_bm25_retriever(chunks_path: Path, 
-                         storage_path: Path) -> BM25Okapi:
+def create_bm25_retriever() -> BM25Okapi:
     """
     Create BM25 retriever from chunks and save to persistent storage.
     

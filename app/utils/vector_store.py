@@ -9,6 +9,9 @@ from qdrant_client.models import (
     PointStruct,
 )
 
+chunks_path = Path(settings.chunked_data_dir) / settings.chunked_file_name
+embeddings_path = Path(settings.embeddings_data_dir) / settings.embeddings_file_name
+
 
 def get_qdrant_client():
     qdrant_client = QdrantClient(
@@ -21,8 +24,6 @@ def get_qdrant_client():
 
 def populate_vectordb(
     client,
-    embeddings_path,
-    chunks_path,
     batch_size: int = 100
 ):
     """

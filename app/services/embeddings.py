@@ -6,9 +6,11 @@ from app.utils.embedding_function import embed_function
 
 embedding_dim = settings.embedding_dimension
 batch_size = 128
+chunk_path = Path(settings.chunked_data_dir) / settings.chunked_file_name
+embed_path = Path(settings.embeddings_data_dir) / settings.embeddings_file_name
 
 
-def embed_chunks(chunk_path, embed_path) :
+def embed_chunks() :
     df = pd.read_json(chunk_path)
     chunks = df['content'].to_list()
 

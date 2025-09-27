@@ -1,6 +1,10 @@
 import re
 import pandas as pd
 import json
+from app.config import settings
+
+processed_data_path = Path(settings.processed_data_dir) / settings.processed_file_name
+chunked_data_path = Path(settings.chunked_data_dir) / settings.chunked_file_name
 
 def generate_chunks(job):
   # Regular expression to capture each section with its name
@@ -24,7 +28,7 @@ def save_chunks_to_json(chunks, filename):
     print(f'Chunks saved')
 
 
-def chunk_job_descriptions(processed_data_path, chunk_path):
+def chunk_job_descriptions():
     df = pd.read_json(processed_data_path)
     df['chunks'] = df.apply(generate_chunks, axis=1)
 

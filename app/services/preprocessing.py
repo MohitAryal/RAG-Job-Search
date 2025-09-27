@@ -5,9 +5,12 @@ from app.utils.location_cleaner import preprocess_job_location
 from app.utils.tags_cleaner import clean_tags
 from app.utils.title_cleaner import clean_job_titles
 from app.utils.description_cleaner import html_to_markdown
+from app.config import settings
 
+raw_data_path = Path(settings.raw_data_dir) / settings.file_name
+processed_data_path = Path(settings.processed_data_dir) / settings.processed_file_name
 
-def preprocess_dataset(raw_data_path, processed_data_path):
+def preprocess_dataset():
     """Function to preprocess the dataset and store it as a json file"""
     
     print("Preprocessing the dataset...")
