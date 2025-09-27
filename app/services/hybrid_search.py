@@ -1,10 +1,10 @@
-from app.helpers.keyword_retriever import search_bm25
-from app.helpers.vector_retriever import qdrant_semantic_search
+from app.services.keyword_retriever import search_bm25
+from app.services.vector_retriever import qdrant_semantic_search
 from app.config import settings
-from typing import Optional, List, Any
-import pandas as pd
+from typing import List
 
-def perform_hybrid_search(query: str, filter:Optional[dict[str, Any]] = None) -> List[str]:
+
+def perform_hybrid_search(query: str) -> List[str]:
     '''
     Performs keyword + semantic search and returns top n document ids.
     

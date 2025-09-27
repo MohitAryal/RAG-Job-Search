@@ -51,12 +51,8 @@ ehthumbs.db
 Thumbs.db
 
 # Data directories (raw data, processed data, embeddings)
-app/data/raw/*
-app/data/processed/*
-app/data/embeddings/*
-data/raw/*
-data/processed/*
-data/embeddings/*
+app/data/*
+data/*
 
 # Keep directory structure but ignore contents
 !app/data/raw/.gitkeep
@@ -69,9 +65,6 @@ data/embeddings/*
 # Logs
 *.log
 logs/
-
-# Docker
-.dockerignore
 
 # Temporary files
 *.tmp

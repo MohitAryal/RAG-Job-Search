@@ -30,7 +30,6 @@ class Settings(BaseSettings):
     # Search Configuration
     default_top_k: int = Field(default=20, alias="DEFAULT_TOP_K")
     max_top_k: int = Field(default=50, alias="MAX_TOP_K")
-    similarity_threshold: float = Field(default=0.7, alias="SIMILARITY_THRESHOLD")
     
     # Reranking
     reranker_model: str = Field(default="cross-encoder/ms-marco-MiniLM-L-6-v2", alias="RERANKER_MODEL")
@@ -42,10 +41,6 @@ class Settings(BaseSettings):
     
     # Hybrid Search
     k: float = Field(default=60, alias="K")
-
-    # Rate Limiting
-    rate_limit_per_minute: int = Field(default=60, alias="RATE_LIMIT_PER_MINUTE")
-    rate_limit_burst: int = Field(default=10, alias="RATE_LIMIT_BURST")
     
     # Data Directories
     data_dir: str = Field(default="./data", alias="DATA_DIR")
