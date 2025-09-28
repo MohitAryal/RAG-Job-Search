@@ -14,5 +14,3 @@ def run_pipeline(query: str):
     llm_output = llm_result(reranked_result, query)
 
     return llm_output
-
-run_pipeline(query='ML engineer with rag langchain knowledge and 4 years of experience.')
