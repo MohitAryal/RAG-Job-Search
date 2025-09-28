@@ -16,11 +16,9 @@ class QueryRequest(BaseModel):
 
     @validator('query')
     def validate_query(cls, v):
-        """Ensure query is not empty/whitespace and has alphanumeric content."""
+        """Ensure query is not empty/whitespace"""
         if not v.strip():
             raise ValueError('Query cannot be empty or just whitespace')
-        if not any(c.isalnum() for c in v):
-            raise ValueError('Query must contain at least one alphanumeric character')
         return v.strip()
 
 
@@ -43,15 +41,9 @@ class SearchResult(BaseModel):
     location: JobLocation = Field(..., description="Job location information")
     tags: List[str] = Field(default=[], description="Job tags")
     
-    content_snippet: str = Field(
-        ..., 
-        description="Relevant content snippet from job description",
-        max_length=150
-    )
-    
     full_description: str = Field(
         ...,
-        description="Full job description (included only if requested)"
+        description="Full job description"
     )
     
     explanation: str = Field(
@@ -67,3 +59,6 @@ class QueryResponse(BaseModel):
         ..., 
         description="List of search results"
     )
+
+class MessageResponse(BaseModel):
+    message: str = Field(..., description="Explanation for no results or out-of-scope query")
