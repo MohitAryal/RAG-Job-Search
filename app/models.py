@@ -1,6 +1,5 @@
 from pydantic import BaseModel, Field, validator
 from typing import List, Optional
-from datetime import datetime
 from app.config import settings
 
 
@@ -13,19 +12,6 @@ class QueryRequest(BaseModel):
         max_length=200,
         description="Search query for job listings",
         example="senior data scientist machine learning"
-    )
-    
-    top_k: int = Field(
-        default=settings.reranker_top_k,
-        ge=1,
-        le=10,
-        description="Number of results to return (1–10)",
-        example=3
-    )
-    
-    include_full_jd: bool = Field(
-        default=False,
-        description="If True, include full job descriptions in results"
     )
 
     @validator('query')
@@ -50,7 +36,6 @@ class JobLocation(BaseModel):
 class SearchResult(BaseModel):
     """Model for individual search result."""
     
-    rank: int = Field(..., description="Ranking position of this result (1-based)")
     title: str = Field(..., description="Job title")
     company: str = Field(..., description="Company name")
     category: str = Field(..., description="Job category")
@@ -64,12 +49,12 @@ class SearchResult(BaseModel):
         max_length=150
     )
     
-    full_description: Optional[str] = Field(
-        None,
+    full_description: str = Field(
+        ...,
         description="Full job description (included only if requested)"
     )
     
-    explanation = Field(
+    explanation: str = Field(
         ...,
         description="LLM-generated explanation for why this job is relevant"
     )
@@ -78,17 +63,7 @@ class SearchResult(BaseModel):
 class QueryResponse(BaseModel):
     """Response model for job search queries."""    
     
-    answer: Optional[str] = Field(
-        None,
-        description="LLM-generated overall summary of the results"
-    )
-    
     results: List[SearchResult] = Field(
         ..., 
-        description="List of ranked search results"
-    )
-    
-    timestamp: datetime = Field(
-        default_factory=datetime.now,
-        description="Timestamp of the search"
+        description="List of search results"
     )
