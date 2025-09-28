@@ -17,7 +17,8 @@ def llm_result(results, query):
                 "system",
                 '''You are a highly skilled job search assistant. Your task is to extract and summarize the most relevant job listings for the user based on their query and provided job data.
                 Use the job data provided. Do not hypothesize anything.
-                If the query is not related to a job data search, be sincere and just return that it's not your expertise(no need to adhere to the output format for this case)
+                If the query is not related to a job data search, be sincere and just return that it's not your expertise(no need to adhere to the output format for this case).
+                If no job is returned or no returned job matches the user's query, apolozize and say that such type of job doesn't exist in the database.
 
     User query:
     "{query}"
@@ -60,7 +61,5 @@ def llm_result(results, query):
     filtered_result = [{k: d[k] for k in keys_to_keep if k in d} for d in results]   
 
     response = chain.invoke({'query': query, 'results': filtered_result})
-
-    print(response)
 
     return response
