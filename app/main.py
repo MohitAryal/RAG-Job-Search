@@ -1,8 +1,7 @@
 from fastapi import FastAPI
-from app.models import QueryRequest, QueryResponse, MessageResponse
+from app.models import QueryRequest, QueryResponse
 from app.inference_pipeline import run_pipeline
 from app.config import logger
-from typing import Union
 
 router = FastAPI(
     title="Job Search RAG API",
