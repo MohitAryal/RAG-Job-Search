@@ -41,14 +41,14 @@ class SearchResult(BaseModel):
     location: JobLocation = Field(..., description="Job location information")
     tags: List[str] = Field(default=[], description="Job tags")
     
-    full_description: str = Field(
+    description: str = Field(
         ...,
         description="Full job description"
     )
     
     explanation: str = Field(
         ...,
-        description="LLM-generated explanation for why this job is relevant"
+        description="Explanation for why this job is relevant"
     )
 
 
