@@ -55,10 +55,5 @@ class SearchResult(BaseModel):
 class QueryResponse(BaseModel):
     """Response model for job search queries."""    
     
-    results: List[SearchResult] = Field(
-        ..., 
-        description="List of search results"
-    )
-
-class MessageResponse(BaseModel):
-    message: str = Field(..., description="Explanation for no results or out-of-scope query")
+    results: Optional[List[SearchResult]] = None
+    message: Optional[str] = None   
