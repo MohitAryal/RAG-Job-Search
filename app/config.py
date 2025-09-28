@@ -1,6 +1,20 @@
 from pydantic_settings import BaseSettings
 from pydantic import Field
 from typing import Optional
+import logging
+
+# Create a logger instance
+logger = logging.getLogger("myapp")
+logger.setLevel(logging.INFO)
+
+# Prevent multiple handlers during auto-reload
+if not logger.handlers:
+    file_handler = logging.FileHandler("app.log")
+    formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+    file_handler.setFormatter(formatter)
+    file_handler.setLevel(logging.INFO)
+
+    logger.addHandler(file_handler)
 
 
 class Settings(BaseSettings):
