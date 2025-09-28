@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.models import QueryRequest, QueryResponse
+from app.models import QueryRequest
 from app.inference_pipeline import run_pipeline
 from app.config import logger
 
@@ -9,7 +9,7 @@ router = FastAPI(
 )
 
 
-@router.post("/api/query", response_model=QueryResponse)
+@router.post("/api/query", response_model=str)
 def query_jobs(request: QueryRequest):
     
     logger.info('Sending request to pipeline')

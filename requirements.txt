@@ -9,7 +9,7 @@ uvicorn[standard]>=0.24.0,<0.25.0
 pydantic>=2.5.0,<2.6.0
 
 # LLM
-langchain-groq
+langchain-groq>=0.3.8
 
 # Vector Database - Qdrant
 qdrant-client>=1.8.0

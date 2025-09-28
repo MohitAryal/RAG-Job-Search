@@ -20,41 +20,4 @@ class QueryRequest(BaseModel):
         if not v.strip():
             raise ValueError('Query cannot be empty or just whitespace')
         return v.strip()
-
-
-class JobLocation(BaseModel):
-    """Model for job location information."""
-    
-    cities: List[str] = Field(default=[], description="List of cities")
-    states: List[str] = Field(default=[], description="List of states")
-    countries: List[str] = Field(default=[], description="List of countries")
-    is_remote: bool = Field(default=False, description="Whether the job is remote")
-
-
-class SearchResult(BaseModel):
-    """Model for individual search result."""
-    
-    title: str = Field(..., description="Job title")
-    company: str = Field(..., description="Company name")
-    category: str = Field(..., description="Job category")
-    level: str = Field(..., description="Job level/seniority")
-    location: JobLocation = Field(..., description="Job location information")
-    tags: List[str] = Field(default=[], description="Job tags")
-    
-    description: str = Field(
-        ...,
-        description="Full job description"
-    )
-    
-    explanation: str = Field(
-        ...,
-        description="Explanation for why this job is relevant"
-    )
-
-
-class QueryResponse(BaseModel):
-    """Response model for job search queries."""    
-    
-    results: Optional[List[SearchResult]] = Field(None, description="List of relevant job matches")
-    message: Optional[str] = Field(None, description="Message explaining why no jobs matched the query")
    

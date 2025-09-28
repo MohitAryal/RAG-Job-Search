@@ -69,10 +69,13 @@ def get_doc_ids(ids: List[int], scores: List[float]) -> Dict:
     # Get score corresponding to each job id
     jobs['scores'] = [scores[i] for i in ids]
 
-    # Store unique job ids with their maximum score and sort by scores
-    job_scores = jobs.groupby('job_id')['scores'].mean().sort_values(ascending=False)
+    # Store unique job ids with their average score and retrieved chunks and sort by scores
+    job_scores = jobs.groupby('job_id').agg({
+        'content': list,
+        'scores': 'mean'
+    }).reset_index().sort_values(by='scores', ascending=False)
+    
+    # Get ranks for the scores
+    job_scores['rank'] = job_scores['scores'].rank(method='first', ascending=False).astype(int)
 
-    # Get a dictionary consisting jobs ids with their rank
-    job_rank = {job_id: rank + 1 for rank, job_id in enumerate(job_scores.index)}
-
-    return job_rank
+    return job_scores[['job_id', 'rank', 'content']]
