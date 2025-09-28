@@ -1,6 +1,5 @@
 from fastapi import FastAPI
-from models import QueryRequest, QueryResponse, SearchResult, JobLocation
-from datetime import datetime
+from models import QueryRequest, QueryResponse
 from app.inference_pipeline import run_pipeline
 
 app = FastAPI(
@@ -10,14 +9,9 @@ app = FastAPI(
 
 
 @app.post("/api/query", response_model=QueryResponse)
-async def query_jobs(request: QueryRequest):
+def query_jobs(request: QueryRequest):
     
-    results = run_pipeline(**request.dict())
-
-    response = QueryResponse(
-        answer=f"Found {len(results)} jobs relevant to your query: '{request.query}'.",
-        results=results,
-        timestamp=datetime.now(),
-    )
+    results = run_pipeline(request)
+    response = QueryResponse(results=results)
 
     return response
