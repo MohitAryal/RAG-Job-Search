@@ -10,18 +10,11 @@ router = FastAPI(
 )
 
 
-@router.post("/api/query", response_model=Union[QueryResponse, MessageResponse])
+@router.post("/api/query", response_model=QueryResponse)
 def query_jobs(request: QueryRequest):
     
     logger.info('Sending request to pipeline')
     results = run_pipeline(request.query)
 
     logger.info('Results found Returning them')
-    
-    if isinstance(results, str):
-        # It's a message like "out of scope" or "no match"
-        logger.info('Sending message as response')
-        return {"message": MessageResponse(llm_response)}
-    
-    logger.info('Sending result as response')
-    return {'results': QueryResponse(results)}
+    return results
