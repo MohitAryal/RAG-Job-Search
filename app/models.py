@@ -55,5 +55,6 @@ class SearchResult(BaseModel):
 class QueryResponse(BaseModel):
     """Response model for job search queries."""    
     
-    results: Optional[List[SearchResult]] = None
-    message: Optional[str] = None   
+    results: Optional[List[SearchResult]] = Field(None, description="List of relevant job matches")
+    message: Optional[str] = Field(None, description="Message explaining why no jobs matched the query")
+   
