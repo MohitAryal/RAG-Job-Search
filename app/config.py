@@ -20,10 +20,6 @@ if not logger.handlers:
 class Settings(BaseSettings):
     """Application configuration settings loaded from environment variables."""
     
-    # API Configuration
-    api_host: str = Field(default="0.0.0.0", alias="API_HOST")
-    api_port: int = Field(default=8000, alias="API_PORT")
-    
     # Vector Database Configuration
     vector_db_url: str = Field(default="http://localhost:6333", alias="VECTOR_DB_URL")
     vector_db_api_key: Optional[str] = Field(default=None, alias="VECTOR_DB_API_KEY")
@@ -43,7 +39,6 @@ class Settings(BaseSettings):
     
     # Search Configuration
     default_top_k: int = Field(default=20, alias="DEFAULT_TOP_K")
-    max_top_k: int = Field(default=50, alias="MAX_TOP_K")
     
     # Reranking
     reranker_model: str = Field(default="cross-encoder/ms-marco-MiniLM-L-6-v2", alias="RERANKER_MODEL")

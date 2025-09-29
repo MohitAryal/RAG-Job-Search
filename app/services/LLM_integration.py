@@ -37,9 +37,7 @@ def llm_result(results, query):
     - Do not select jobs based on keyword overlap alone. If the job does not clearly belong to the same professional domain, do not include it even if similar words are used.
     - If match is found, identify the top jobs that are most relevant to the user's query. Select a maximum of 3 relevant jobs. If there aren't 3 jobs relevant to the query, you may respond with any number of jobs you see fit.
     - If the query includes filters like "remote only", "3+ years of experience", or "roles in USA", try to match the selected jobs match these conditions.
-    - Do not give explanation for the jobs not selected.
-    - Only select jobs where both the job title and description clearly indicate a role of the same profession as the query (e.g., "doctor" must relate to treating patients, "engineer" to building/engineering products, "teacher" to teaching, etc.).
-
+    - If a job is not selected, do not mention it and do not give explanation for why it wasn't selected.
 
     2. **Explanation**:
     - For each selected job, provide a 2-3 sentence(max 100 characters) explanation for why it was chosen based on the chunks received in job data.
@@ -50,13 +48,16 @@ def llm_result(results, query):
     If there is a match between job and query, keep the output format exactly as follows:
 
     1. **[Job ID] - [Job Title: exact job title quoted from metadata of Job Data]**  
-    - This job was chosen because [reason].  
-    - [Any other reason if applicable].  
-    - [Any other reason if applicable].
-    - **Location:** [location: include all the location details mentioned in the metadata. Map each city with their states and countries as mentioned in the metadata.]  
+    - This job was chosen because [reason]. [example: this job was chosen because the user mentioned so and so in the title.] If the title doesn't match, no need to give this reason
+    - [Any other reason if applicable].  example: The location so and so mentioned by the user also matches.
+    - [Any other reason if applicable]. example: This is shown because user mentioned 3 years experince. 
+    - **Location:** [location: include all the location details mentioned in the metadata.]  
     - **Seniority:** [seniority]
 
     2. **[Job ID] - [Job Title]**
+    ...
+
+    3. **[Job ID] - [Job Title]**
     ...
 
     Else in case of no match return a one-sentence answer mentioning the one of the two reasons based on the query: 
