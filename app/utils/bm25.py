@@ -5,6 +5,7 @@ from rank_bm25 import BM25Okapi
 import re
 import pandas as pd
 from app.config import settings
+from app.config import logger
 
 chunked_data_path = Path(settings.chunked_data_dir) / settings.chunked_file_name
 keyword_retriever_path = Path(settings.keyword_retriever_dir) / settings.keyword_retriever_file
@@ -62,5 +63,5 @@ def create_bm25_retriever() -> BM25Okapi:
     with open(storage_path, 'wb') as f:
         pickle.dump(bm25_retriever, f)
     
-    print(f"BM25 retriever saved to {storage_path}")
+    logger.info(f"BM25 retriever saved to {storage_path}")
     return
