@@ -51,11 +51,11 @@ ehthumbs.db
 Thumbs.db
 
 # Data directories (raw data, processed data, embeddings)
-app/data/chunks/*
-app/data/embeddings/*
-app/data/keyword_retriever/*
-app/data/processed/*
-app/data/raw/*
+app/data/chunks/** */
+app/data/embeddings/** */
+app/data/keyword_retriever/** */
+app/data/processed/** */
+app/data/raw/** */
 
 # Keep directory structure but ignore contents
 !app/data/raw/.gitkeep
@@ -63,12 +63,6 @@ app/data/raw/*
 !app/data/embeddings/.gitkeep
 !app/data/keyword_retriever/.gitkeep
 !app/data/chunks/.gitkeep
-
-!data/raw/.gitkeep
-!data/processed/.gitkeep
-!data/embeddings/.gitkeep
-!data/keyword_retriever/.gitkeep
-!data/chunks/.gitkeep
 
 # Logs
 *.log
