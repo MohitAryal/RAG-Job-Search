@@ -193,7 +193,6 @@ Explanation: This role emphasizes machine learning leadership and supports remot
 ## Known Limitations
 
 - Ingestion pipeline must be run manually before queries can be served
-- Responses are returned as formatted strings rather than structured JSON
 - No programmatic filters for job attributes (remote, location, seniority)
 - LLM adds latency (~1-3 seconds per query)
 - Dependent on external API availability (Qdrant, Groq)
@@ -201,7 +200,6 @@ Explanation: This role emphasizes machine learning leadership and supports remot
 ## Future Enhancements
 
 - [ ] Structured filtering (location, remote, salary range)
-- [ ] JSON response format alongside human-readable text
 - [ ] Automatic ingestion on startup or scheduled updates
 - [ ] Query/result caching to reduce LLM calls
 - [ ] User feedback loop for continuous improvement
