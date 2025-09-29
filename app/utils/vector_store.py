@@ -57,4 +57,3 @@ def populate_vectordb(
             collection_name=settings.vector_db_collection_name,
             points=batch_points,
         )
-        print(f"Uploaded batch {start} to {end} ({end - start} vectors)")

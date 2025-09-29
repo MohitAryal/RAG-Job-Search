@@ -6,6 +6,7 @@ from app.utils.tags_cleaner import clean_tags
 from app.utils.title_cleaner import clean_job_titles
 from app.utils.description_cleaner import html_to_markdown
 from app.config import settings
+from app.config import logger
 
 raw_data_path = Path(settings.raw_data_dir) / settings.file_name
 processed_data_path = Path(settings.processed_data_dir) / settings.processed_file_name
@@ -33,6 +34,6 @@ def preprocess_dataset():
     
     # Save as JSON
     df.to_json(processed_data_path, orient='records', indent=2)
-    print(f"\nPreprocessing complete. Saved to {processed_data_path}")
+    logger.info(f"\nPreprocessing complete. Saved to {processed_data_path}")
     
     return

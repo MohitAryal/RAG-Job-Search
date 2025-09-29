@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import math
 from app.utils.embedding_function import embed_function
+from app.config import logger
 
 embedding_dim = settings.embedding_dimension
 batch_size = 128
@@ -28,5 +29,5 @@ def embed_chunks() :
         batch_embeddings = embed_function(batch_texts)
         embeddings_memmap[i:i+len(batch_texts)] = batch_embeddings
     
-    print('\nEmbeddings complete')
+    logger.info('\nEmbeddings complete')
     

@@ -2,6 +2,7 @@ import re
 import pandas as pd
 import json
 from app.config import settings
+from app.config import logger
 
 processed_data_path = Path(settings.processed_data_dir) / settings.processed_file_name
 chunked_data_path = Path(settings.chunked_data_dir) / settings.chunked_file_name
@@ -25,7 +26,7 @@ def generate_chunks(job):
 def save_chunks_to_json(chunks, filename):
     with open(filename, 'w', encoding='utf-8') as f:
         json.dump(chunks, f, ensure_ascii=False, indent=2)
-    print(f'Chunks saved')
+    logger.info(f'Chunks saved')
 
 
 def chunk_job_descriptions():
