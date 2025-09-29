@@ -61,9 +61,14 @@ app/data/raw/*
 !app/data/raw/.gitkeep
 !app/data/processed/.gitkeep
 !app/data/embeddings/.gitkeep
+!app/data/keyword_retriever/.gitkeep
+!app/data/chunks/.gitkeep
+
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 !data/embeddings/.gitkeep
+!data/keyword_retriever/.gitkeep
+!data/chunks/.gitkeep
 
 # Logs
 *.log
